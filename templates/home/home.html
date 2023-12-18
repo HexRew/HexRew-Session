@@ -6,6 +6,21 @@
     {% include "base/alert.html" %}
     <h1>Home</h1><hr>
     <br>
-    {% load static %}
-    <img src="{% static '_user_profiles/default.png' %}" alt="">
+
+    <h1>Notes</h1>
+    <ul>
+        {% for note in notes %}
+            <li>{{ note }}</li>
+        {% endfor %}
+    </ul>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="new_note">Add a new note:</label>
+        <input type="text" name="new_note" required>
+        <button type="submit">Add Note</button>
+    </form>
+    <h1>Clear Session</h1><a href="/flush">clear</a>
+
+
 {% endblock body %}
