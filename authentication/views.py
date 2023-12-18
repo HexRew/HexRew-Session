@@ -6,7 +6,23 @@ from authentication.models import *
 
 # @login_required(login_url="/login")
 def home(request):
-    return render(request, "home/home.html")
+        # Get the existing notes from the session
+    notes = request.session.get('notes', [])
+
+    if request.method == 'POST':
+        # Handle form submission to add a new note
+        new_note = request.POST.get('new_note', '')
+        notes.append(new_note)
+
+        # Update the session with the new notes
+        request.session['notes'] = notes
+        return redirect(request.path)
+    return render(request, "home/home.html", {'notes': notes})
+
+def fl_session_id(request):
+    messages.success(request,"Session cookie cleared successfully")
+    request.session.flush()
+    return redirect("/")
 
 def signup(request):
     if request.method == "POST":
@@ -52,3 +68,9 @@ def logoutUser(request):
     logout(request)
     return redirect('/login')
     # return HttpResponse("Logout page")
+    
+@login_required(login_url="/login")
+def ViewProfile(request, username):
+    profile = Profile.objects.get(user__username=username)
+    context = {"profile":profile}
+    return render(request, "profile/ViewProfile.html", context)
