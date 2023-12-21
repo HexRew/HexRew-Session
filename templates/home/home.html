@@ -1,6 +1,7 @@
 {% extends "../base/base.html" %}
-
+{% load static %}
 {% block title %} Session {% endblock title %}
+
 
 {% block body %}
     {% include "base/alert.html" %}
@@ -10,7 +11,7 @@
         <h1>Notes</h1>
         <ul>
             {% for note in notes %}
-                <li>{{ note }}</li>
+            <li>{{ note }}</li>
             {% endfor %}
         </ul>
     
@@ -22,15 +23,19 @@
         </form>
         {% if user.is_authenticated %}
         {% else %}
-            <h1>Clear Session</h1><a href="/flush">clear</a>
+        <h1>Clear Session</h1><a href="/flush">clear</a>
         {% endif %}
     </div>
-
+    
     <style>
+        body{
+            background-image: url('{% static 'images/wall6.jpg' %}');
+        }
         .left-sidebar{
             float: left;
-            border-radius: 2px solid black;
+            border: 2px solid black;
+            border-radius: 2px;
         }
-
+    
     </style>
 {% endblock body %}
