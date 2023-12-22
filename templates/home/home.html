@@ -1,41 +1,56 @@
-{% extends "../base/base.html" %}
-{% load static %}
-{% block title %} Session {% endblock title %}
-
+{% extends "../base/base.html" %} 
+{% load static %} 
+{% block title %}Session{% endblock title %}
+<link href="{% static 'style.css' %}" rel="stylesheet" />
 
 {% block body %}
-    {% include "base/alert.html" %}
-    <h1>Home</h1><hr>
-    <br>
+
+<div class="contain">
     <div class="left-sidebar">
         <h1>Notes</h1>
         <ul>
-            {% for note in notes %}
-            <li>{{ note }}</li>
-            {% endfor %}
+          {% for note in notes %}
+          <li>{{ note }}</li>
+          {% endfor %}
         </ul>
-    
+      
         <form method="post">
-            {% csrf_token %}
-            <label for="new_note">Add a new note:</label>
-            <input type="text" name="new_note" required>
-            <button type="submit">Add Note</button>
+          {% csrf_token %}
+          <label for="new_note">Add a new note:</label>
+          <input type="text" name="new_note" required />
+          <button type="submit">Add Note</button>
         </form>
-        {% if user.is_authenticated %}
-        {% else %}
-        <h1>Clear Session</h1><a href="/flush">clear</a>
+        {% if user.is_authenticated %} {% else %}
+        <h1>Clear Session</h1>
+        <a href="/flush">clear</a>
         {% endif %}
     </div>
-    
-    <style>
-        body{
-            background-image: url('{% static 'images/wall6.jpg' %}');
-        }
-        .left-sidebar{
-            float: left;
-            border: 2px solid black;
-            border-radius: 2px;
-        }
-    
-    </style>
+  <div class="container">
+    <div class="music-player">
+      {% for item in page_obj %}
+      <div class="cover">
+        <img alt="" src="{{item.image.url}}" />
+      </div>
+      <div class="titre">
+        <h3>{{item.artist}}</h3>
+        <h1>{{item.title}}</h1>
+      </div>
+      <center>
+        <a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}"><i class="fa fa-step-backward fa-2x"></i></a>
+        &nbsp; &nbsp; &nbsp;
+        <a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }} {% endif %}"><i class="fa fa-step-forward fa-2x"></i></a>
+      </center>
+      <div class="lecteur">
+        <audio class="fc-media" style="width: 100%">
+          <source src="{% if item.audio_file %}{{item.audio_file.url}} {% else %} {{item.audio_link}} {% endif %}" type="audio/mp3"/>
+        </audio>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mediaelement/4.2.7/mediaelement-and-player.min.js"></script>
+<script src="{% static 'script.js' %}"></script>
 {% endblock body %}
