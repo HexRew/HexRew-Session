@@ -69,6 +69,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'hexrew',
         'USER': 'hexrew_admin',
+        'PASSWORD': '1234',
     }
 }
 
