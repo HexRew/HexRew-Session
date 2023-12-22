@@ -9,6 +9,18 @@ class Note(BaseModel):
     def __str__(self) -> str:
         return self.user.username
 
+class Song(models.Model):
+    title= models.TextField()
+    artist= models.TextField()
+    image= models.ImageField(upload_to="images/_songimage",default="images/_songimage/default_artist.png")
+    audio_file = models.FileField(blank=True,null=True)
+    audio_link = models.CharField(max_length=200,blank=True,null=True)
+    duration=models.CharField(max_length=20)
+    paginate_by = 2
+
+    def __str__(self):
+        return self.title
+    
 class Profile(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     is_email_verified = models.BooleanField(default=False)
