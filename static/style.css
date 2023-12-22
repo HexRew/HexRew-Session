@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;1,100&display=swap');
+
 *:focus{
     outline: none;
 }
@@ -8,7 +10,7 @@ html {
 
 body {
     margin: 0;
-    font-family: "Raleway",sans-serif;
+    font-family: 'Poppins', sans-serif;
     padding: 0;
     background-color: #1c2946;
     overflow: hidden;
@@ -119,6 +121,28 @@ h3 {
     display: block;
 }
 
+/* Login & Signin */
+.card {
+    border-radius: 5%;
+    background-color: rgba(255, 255, 255, 0.315); /* Adjust the alpha value for the desired level of frosted effect */
+    backdrop-filter: blur(10px);
+    text-align: center;
+    padding: 10px;
+}
+
+.form-head {
+    font-size: 30px;
+    text-align: center;
+    margin: 10px;
+    color: #000000;
+    font-weight: 600;
+    user-select: none;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
 /* Containers */
 
 .main-container {
@@ -142,6 +166,11 @@ h3 {
 .log-container {
     z-index: 3;
     position: absolute;
+    width: 400px;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .norm-container {
