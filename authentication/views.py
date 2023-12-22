@@ -3,17 +3,23 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from authentication.models import *
+from django.core.paginator import Paginator
 
 @login_required(login_url="/login")
 def home(request):
     if request.user.is_authenticated:
-        user_notes = Note.objects.filter(user__username=request.user)
-        user_notes_values = user_notes.values_list('content', flat=True)
+        user_notes = Note.objects.filter(user__username=request.user) #Object
+        user_notes_values = user_notes.values_list('content', flat=True) #Instance
         if request.method == 'POST':
             new_note = request.POST.get('new_note', '')
             new_note_save = Note.objects.create(user=request.user, content = new_note)
             return redirect(request.path)
-        return render(request, "home/home.html", {'notes': user_notes_values})
+        song_obj = Song.objects.all().order_by('id')
+        paginator= Paginator(song_obj,1)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context={"page_obj":page_obj,'notes': user_notes_values}
+        return render(request, "home/home.html",context)
     else:
         messages.debug(request, "You need to login first")
         return render(request, "home/home.html")
