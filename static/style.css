@@ -1,22 +1,34 @@
 *:focus{
     outline: none;
 }
+
 html {
     background: #f2f2f2;
 }
+
 body {
     margin: 0;
     font-family: "Raleway",sans-serif;
-    background-image: url("https://mariongrandvincent.github.io/HTML-Personal-website/img-codePen/bg-music-player.jpg");
-    background-repeat: repeat;
-    background-size: cover;
+    padding: 0;
+    background-color: #1c2946;
+    overflow: hidden;
 }
+
+#wall {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; 
+}
+
 h1 {
     margin: 0;
     font-size: 33px;
     color: #fff;
     padding: 0 10%;
 }
+
 h3 {
     margin: 0;
     font-size: 17px;
@@ -24,14 +36,120 @@ h3 {
     color: #ccc;
     padding: 0 10%;
 }
-.container {
+
+/* Nav-Bar */
+
+.navbar {
+    background: #222;
+    z-index: 2;
+}
+
+.navbar a {
+    position: relative;
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #fff700;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.navbar a:hover {
+    color: rgb(255, 174, 0);
+}
+
+.navbar a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.navbar a.active {
+    color: rgb(255, 174, 0);
+}
+
+.navbar a.active::after {
+    width: 100%;
+    left: 0;
+}
+
+.user-icon {
+    font-size: 20px;
+    border: none;
+    outline: none;
+    color: #f2f2f2;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    right: 0;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+/* Containers */
+
+.main-container {
+    position: absolute;
+    z-index: 2;
+}
+
+.left-sidebar {
+    z-index: 3;
+}
+
+.mus-container {
     display: block;
     width: 100%;
     height: 750px;
     margin: auto;
     overflow: hidden;
-
+    z-index: 3;
 }
+
+.log-container {
+    z-index: 3;
+    position: absolute;
+}
+
+.norm-container {
+    z-index: 3;
+    position: absolute;
+}
+
+/* Music Related */
 .music-player {
     display: block;
     position: relative;
@@ -43,11 +161,13 @@ h3 {
     background: transparent linear-gradient(to bottom,rgba(10,11,31,0.9) 50%,rgb(10,11,31) 70%) repeat scroll 0 0;
     box-shadow: 1px 10px 20px 5px #222;
 }
+
 .cover {
     float: left;
     width: 100%;
     height: 66%;
 }
+
 .cover img {
     display: block;
     position: absolute;
@@ -57,10 +177,12 @@ h3 {
     margin: auto;
     text-align: center;
 }
+
 .titre {
     float: left;
     width: 100%;
 }
+
 .lecteur {
     width: 100%;
     display: block;
@@ -68,31 +190,37 @@ h3 {
     position: relative;
     float: left;
 }
+
 .mejs__button>button:focus {
     outline: 0px dotted #999;
 }
+
 .mejs__container {
     position: relative;
     background-color: transparent;
     min-width: auto !important;
 }
+
 .mejs__controls {
     padding: 0 10%;
     background: transparent !important;
     display: block;
     position: relative;
 }
+
 .mejs__controls div {
     display: block;
     float: left;
     position: relative;
 }
+
 .mejs__controls .mejs__playpause-button {
     position: absolute !important;
     right: 8%;
     bottom: 95%;
     width: 40px;
 }
+
 .mejs__controls .mejs__playpause-button button {
     display: block;
     width: 40px;
@@ -106,12 +234,15 @@ h3 {
     padding: 0;
     margin: 0;
 }
+
 .mejs__controls .mejs__play button:before{
     content:"\f04b";
 }
+
 .mejs__controls .mejs__pause button:before{
     content:"\f04c";
 }
+
 .mejs__controls .mejs__volume-button button {
     display: block;
     width: 40px;
@@ -125,12 +256,15 @@ h3 {
     margin: 0;
     padding: 0;
 }
+
 .mejs__controls .mejs__mute button:before {
     content: "\f028";
 }
+
 .mejs__controls .mejs__unmute button:before {
     content: "\f026";
 }
+
 .mejs__controls .mejs__time {
     width: 100%;
     margin-top: 7%;
@@ -141,22 +275,27 @@ h3 {
     overflow: visible;
     min-width: 100%;
 }
+
 .mejs__controls .mejs__time span {
     font-size: 15px;
 }
+
 .mejs__controls span.mejs__duration {
     float: right;
     text-align: right;
     color: #ccc;
 }
+
 .mejs__controls span.mejs__currenttime {
     font-weight: 700;
     float: left;
 }
+
 .mejs__controls .mejs__time-rail {
     width: 100%;
     margin: 0;
 }
+
 .mejs__controls .mejs__time-rail span {
     position: absolute;
     top: 0;
@@ -165,9 +304,11 @@ h3 {
     border-radius: 50px;
     cursor: pointer;
 }
+
 .mejs__controls .mejs__time-rail .mejs__time-loaded {
     background: rgba(255,255,255,0.2);
 }
+
 .mejs__controls .mejs__time-rail .mejs__time-float {
     display: none;
     top: -40px;
@@ -179,6 +320,7 @@ h3 {
     background: #fff;
     border: 0;
 }
+
 .mejs__controls .mejs__time-rail .mejs__time-float-current {
     display: block;
     position: relative;
@@ -187,6 +329,7 @@ h3 {
     line-height: 26px;
     color: #100d28;
 }
+
 .mejs__controls .mejs__time-rail .mejs__time-float-corner {
     top: auto;
     bottom: -9px;
@@ -197,12 +340,15 @@ h3 {
     border-right: 6px solid transparent;
     border-left: 6px solid transparent;
 }
+
 .mejs__controls .mejs__time-rail .mejs__time-current {
     background: #5BBB95 none repeat scroll 0 0;
 }
+
 .mejs__controls .mejs__time-handle {
     display: none;
 }
+
 .mejs__controls .mejs__volume-button {
     position: relative;
     position: absolute !important;
@@ -211,6 +357,7 @@ h3 {
     width: 40px;
     height: 40px;
 }
+
 .mejs__controls .mejs__horizontal-volume-slider {
     display: block;
     position: absolute !important;
@@ -223,6 +370,7 @@ h3 {
     border-radius: 50px;
     line-height: 11px;
 }
+
 .mejs__controls .mejs__horizontal-volume-slider .mejs__horizontal-volume-total,
 .mejs__controls .mejs__horizontal-volume-slider .mejs__horizontal-volume-current {
     position: absolute;
@@ -232,7 +380,7 @@ h3 {
     height: 100%;
     background: rgba(255,255,255,0.1);
 }
+
 .mejs__controls .mejs__horizontal-volume-slider .mejs__horizontal-volume-current {
     background: #fff;
 }
-

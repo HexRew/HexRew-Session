@@ -4,7 +4,8 @@
 {% block title %} Profile{% endblock title %}
 
 {% block body %}
-
+<div class="norm-container">
 <img src="{{ profile.profile_image.url }}" alt="Profile Image">
 <p>{{user.username}}</p>
+</div>
 {% endblock body %}
