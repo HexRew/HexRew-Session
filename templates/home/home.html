@@ -5,10 +5,10 @@
 
 {% block body %}
 
-<div class="main-container">
-	<div class="left-sidebar">
-		<h1>Notes</h1>
-		<ul>
+<div class="main-container container-fluid row">
+	<div class="left-sidebar col-md-3 m-2 d-none d-md-block sidebar h-100 p-2 rounded">
+		<h1 class="display-4 text-center">Notes</h1>
+		<ul class="list-unstyled">
 			{% for note in notes %}
 			<li>{{ note }}</li>
 			{% endfor %}
@@ -16,36 +16,47 @@
 	
 		<form method="post">
 			{% csrf_token %}
-			<label for="new_note">Add a new note:</label>
-			<input type="text" name="new_note" required />
-			<button type="submit">Add Note</button>
+			<h5 for="new_note">Add a new note:</h5>
+			<div class="input-group flex-nowrap">
+				<input type="text" name="new_note" class="form-control" required />
+				<button type="submit" class="btn btn-outline-light">Add Note</button>
+			</div>
 		</form>
 		{% if user.is_authenticated %} {% else %}
 		<h1>Clear Session</h1>
 		<a href="/flush">clear</a>
 		{% endif %}
 	</div>
-	<div class="mus-container">
-		<div class="music-player">
-			{% for item in page_obj %}
-			<div class="cover">
-				<img alt="" src="{{item.image.url}}" />
+	<div class="col-md-6 m-2">
+		<div class="row m-2">
+			<!-- Pomadora clock -->
+		</div>
+		<div class="mus-container mx-auto container-sm rounded row p-2">
+			<div class="music-player row">
+				{% for item in page_obj %}
+				<div class="rounded mx-auto cover col-md-3 align-items-center">
+					<img class="img-thumbnail rounded" src="{{item.image.url}}" />
+				</div>
+				<div class="titre col-md-9 text-align-center">
+					<h3>{{item.artist}}</h3>
+					<h1>{{item.title}}</h1>
+				</div>
 			</div>
-			<div class="titre">
-				<h3>{{item.artist}}</h3>
-				<h1>{{item.title}}</h1>
+			<div class="row">
+				<center>
+					<a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}"><i class="fa fa-step-backward fa-2x"></i></a>
+					&nbsp; &nbsp; &nbsp;
+					<a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }} {% endif %}"><i class="fa fa-step-forward fa-2x"></i></a>
+				</center>
 			</div>
-			<center>
-				<a href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% endif %}"><i class="fa fa-step-backward fa-2x"></i></a>
-				&nbsp; &nbsp; &nbsp;
-				<a href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }} {% endif %}"><i class="fa fa-step-forward fa-2x"></i></a>
-			</center>
-			<div class="lecteur">
-				<audio class="fc-media" style="width: 100%">
-					<source src="{% if item.audio_file %}{{item.audio_file.url}} {% else %} {{item.audio_link}} {% endif %}" type="audio/mp3"/>
-				</audio>
+			<div class="row">
+				<div class="lecteur">
+					<audio class="fc-media" style="width: 100%">
+						<source src="{% if item.audio_file %}{{item.audio_file.url}} {% else %} {{item.audio_link}} {% endif %}" type="audio/mp3"/>
+					</audio>
+				</div>
+				{% endfor %}
 			</div>
-			{% endfor %}
 		</div>
 	</div>
 </div>

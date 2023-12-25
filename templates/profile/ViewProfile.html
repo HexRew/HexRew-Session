@@ -5,7 +5,15 @@
 
 {% block body %}
 <div class="norm-container">
-<img src="{{ profile.profile_image.url }}" alt="Profile Image">
-<p>{{user.username}}</p>
+    <div>
+        <img src="{{ profile.profile_image.url }}" alt="Profile Image">
+        <p>{{user.username}}</p>
+    </div>
+    <div>
+        <p>Streak</p>
+        <div>
+            Info
+        </div>
+    </div>
 </div>
 {% endblock body %}
