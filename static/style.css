@@ -70,7 +70,7 @@ h3 {
 
 /* Containers */
 
-/* .main-container {
+.main-container {
     position: absolute;
     z-index: 2;
 }
@@ -98,7 +98,7 @@ h3 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-} */
+}
 
 .norm-container {
     /* z-index: 3; */

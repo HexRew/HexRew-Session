@@ -5,33 +5,35 @@
 
 {% block body %}
 
-<div class="main-container container-fluid row vw-100 ">
-	<div class="left-sidebar col-md-3 m-2 d-none d-md-block sidebar h-100 p-2 rounded">
-		<h1 class="display-4 text-center">Notes</h1>
-		<ul class="list-unstyled">
-			{% for note in notes %}
-			<li>{{ note }}</li>
-			{% endfor %}
-		</ul>
-	
-		<form method="post">
-			{% csrf_token %}
-			<h5 for="new_note">Add a new note:</h5>
-			<div class="input-group flex-nowrap">
-				<input type="text" name="new_note" class="form-control" required />
-				<button type="submit" class="btn btn-outline-light">Add Note</button>
-			</div>
-		</form>
-		{% if user.is_authenticated %} {% else %}
-		<h1>Clear Session</h1>
-		<a href="/flush">clear</a>
-		{% endif %}
+<div class="main-container container-fluid row h-100 ">
+	<div class="col-md-3">
+		<div class="left-sidebar m-2 d-none d-md-block sidebar h-100 p-2 rounded">
+			<h1 class="display-4 text-center">Notes</h1>
+			<ul class="list-unstyled">
+				{% for note in notes %}
+				<li>{{ note }}</li>
+				{% endfor %}
+			</ul>
+		
+			<form method="post">
+				{% csrf_token %}
+				<h5 for="new_note">Add a new note:</h5>
+				<div class="input-group flex-nowrap">
+					<input type="text" name="new_note" class="form-control" required />
+					<button type="submit" class="btn btn-outline-light">Add Note</button>
+				</div>
+			</form>
+			{% if user.is_authenticated %} {% else %}
+			<h1>Clear Session</h1>
+			<a href="/flush">clear</a>
+			{% endif %}
+		</div>
 	</div>
-	<div class="col-md-6 m-2">
-		<div class="row m-2">
+	<div class="col-md-6">
+		<div class="row m-2 h-50">
 			<!-- Pomadora clock -->
 		</div>
-		<div class="mus-container mx-auto container-sm rounded row p-2">
+		<div class="mus-container container-fluid rounded row h-50 p-2 mx-auto">
 			<div class="music-player row">
 				{% for item in page_obj %}
 				<div class="rounded mx-auto cover col-md-3 align-items-center">
@@ -57,6 +59,11 @@
 				</div>
 				{% endfor %}
 			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="left-sidebar m-2 d-none d-md-block sidebar h-100 p-2 rounded">
+			hello
 		</div>
 	</div>
 </div>
