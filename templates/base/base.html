@@ -34,7 +34,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {% if user.is_authenticated %}
-                                        <img src="{{ user.profile.profile_image.url }}" alt="Profile Image" width="30" height="30" class="d-inline-block align-text-top">
+                                        <img src="{{ user.profile.profile_image.url }}" alt="Profile Image" width="24" height="24" class="d-inline-block align-text-top">
                                     {% else %}
                                         Guest
                                     {% endif %}
